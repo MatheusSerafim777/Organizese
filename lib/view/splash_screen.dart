@@ -1,4 +1,4 @@
-import 'package:organizese/view/controle_interacao//controle_splash_screen.dart';
+import 'package:organizese/view/controle_interacao/controle_splash_screen.dart';
 import 'package:flutter/material.dart';
 
 

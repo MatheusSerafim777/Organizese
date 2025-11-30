@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/domain/Falta.dart';
-import 'package:organizese/controller/FaltaController.dart';
-import 'package:organizese/controller/Controller_funcionario.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/domain/falta.dart';
+import 'package:organizese/controller/falta_controller.dart';
+import 'package:organizese/controller/controller_funcionario.dart';
 
 class ControladorCadastroFalta {
   final formKey = GlobalKey<FormState>();

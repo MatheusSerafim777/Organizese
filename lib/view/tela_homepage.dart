@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:organizese/util/navegacao.dart';
 import 'package:organizese/util/widgets/card_folha_salarial.dart';
 import 'package:organizese/util/formatadores.dart';
-import 'package:organizese/controller/Controller_funcionario.dart';
-import 'package:organizese/view/TelaEdicaoFuncionario.dart';
+import 'package:organizese/controller/controller_funcionario.dart';
+import 'package:organizese/view/tela_edicao_funcionario.dart';
 
 class HomePage extends StatelessWidget {
   final ControladorTelaInicial _controlador = ControladorTelaInicial();

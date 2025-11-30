@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/view/controle_interacao/ControladorCadastroFalta.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/view/controle_interacao/controlador_cadastro_falta.dart';
 import 'package:organizese/util/widgets/card_secao_titulo.dart';
 import 'package:organizese/util/widgets/dropdown_seletor_funcionario.dart';
 import 'package:organizese/util/widgets/seletor_data.dart';
@@ -142,7 +142,6 @@ class _TelaCadastroFaltaState extends State<TelaCadastroFalta> {
               _controlador.alternarTipoFalta(false);
             });
           },
-          icone: Icons.money_off,
           faltaJustificada: false,
         ),
         SizedBox(height: 12),
@@ -155,7 +154,6 @@ class _TelaCadastroFaltaState extends State<TelaCadastroFalta> {
               _controlador.alternarTipoFalta(true);
             });
           },
-          icone: Icons.check_circle,
           faltaJustificada: true,
         ),
       ],

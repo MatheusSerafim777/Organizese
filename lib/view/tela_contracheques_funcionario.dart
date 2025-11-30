@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/domain/Contracheque.dart';
-import 'package:organizese/view/controle_interacao/ControladorContrachequesFuncionario.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/domain/contracheque.dart';
+import 'package:organizese/view/controle_interacao/controlador_contracheques_funcionario.dart';
 import 'package:organizese/util/formatadores.dart';
 
 class TelaContrachequesFuncionario extends StatefulWidget {

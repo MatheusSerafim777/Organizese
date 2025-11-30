@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/domain/Beneficio.dart';
-import 'package:organizese/domain/Falta.dart';
-import 'package:organizese/controller/ContrachequeController.dart';
-import 'package:organizese/controller/Controller_funcionario.dart';
-import 'package:organizese/controller/BeneficioController.dart';
-import 'package:organizese/controller/FuncionarioBeneficioController.dart';
-import 'package:organizese/controller/FaltaController.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/domain/beneficio.dart';
+import 'package:organizese/domain/falta.dart';
+import 'package:organizese/controller/contracheque_controller.dart';
+import 'package:organizese/controller/controller_funcionario.dart';
+import 'package:organizese/controller/beneficio_controller.dart';
+import 'package:organizese/controller/funcionario_beneficio_controller.dart';
+import 'package:organizese/controller/falta_controller.dart';
 
 class ControladorCadastroContracheque {
   final formKey = GlobalKey<FormState>();
@@ -127,7 +127,7 @@ class ControladorCadastroContracheque {
     }
     
     final salario = funcionarioSelecionado!.salario ?? 0.0;
-    final diasUteis = 22; // Média de dias úteis no mês
+    final diasUteis = 30; // Usar 30 dias para cálculo (mesmo valor do contracheque)
     final valorDia = salario / diasUteis;
     
     return valorDia * faltasNaoJustificadas.length;

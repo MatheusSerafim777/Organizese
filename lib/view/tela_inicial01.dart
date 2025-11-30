@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/view/TelaCadastroContracheque.dart';
-import 'package:organizese/view/TelaCadastroFalta.dart';
-import 'package:organizese/view/Tela_homepage.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/view/tela_cadastro_contracheque.dart';
+import 'package:organizese/view/tela_cadastro_falta.dart';
+import 'package:organizese/view/tela_homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:organizese/view/tela_login.dart';
 
 class TelaInicial01 extends StatefulWidget {
   final Funcionario usuario;
@@ -54,9 +55,9 @@ class _TelaInicialState extends State<TelaInicial01> {
             icon: Icon(Icons.logout),
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                '/',
-                (route) => false,
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => Telalogin()),
+                (route) => false
               );
             },
           ),

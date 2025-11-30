@@ -40,6 +40,7 @@ dependencies:
   email_validator: any
   firebase_core_web: ^3.3.0
   intl: ^0.20.2
+  icons_launcher: ^3.0.3
   flutter_dotenv: ^5.2.1
 
 
@@ -58,8 +59,13 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
 
-
-
+icons_launcher:
+  image_path: "assets/images/icone.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

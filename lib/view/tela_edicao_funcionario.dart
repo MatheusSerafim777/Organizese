@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/domain/Cargo.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/domain/cargo.dart';
 import 'package:organizese/util/formatadores.dart';
-import 'package:organizese/view/controle_interacao/Controller_edicao_funcionario.dart';
+import 'package:organizese/view/controle_interacao/controller_edicao_funcionario.dart';
 
 class TelaEdicaoFuncionario extends StatefulWidget {
   final Funcionario funcionario;

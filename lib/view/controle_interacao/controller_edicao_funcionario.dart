@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:organizese/domain/Cargo.dart';
-import 'package:organizese/controller/CargoController.dart';
+import 'package:organizese/domain/cargo.dart';
+import 'package:organizese/controller/cargo_controller.dart';
 
 class ControladorEdicaoFuncionario {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

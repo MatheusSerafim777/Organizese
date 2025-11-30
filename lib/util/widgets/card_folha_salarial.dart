@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/controller/Controller_funcionario.dart';
+import 'package:organizese/controller/controller_funcionario.dart';
 import 'package:organizese/util/formatadores.dart';
 
 class FolhaSalarialCard extends StatelessWidget {

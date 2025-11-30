@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../domain/Beneficio.dart';
+import '../domain/beneficio.dart';
 
 class BeneficioController {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;

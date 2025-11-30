@@ -1,4 +1,4 @@
-import 'package:organizese/domain/Cargo.dart';
+import 'package:organizese/domain/cargo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CargoController {
@@ -12,6 +12,7 @@ class CargoController {
     Cargo(id: '5', nome: 'Analista Sênior', salario: 8000.0),
     Cargo(id: '6', nome: 'Coordenador', salario: 10000.0),
     Cargo(id: '7', nome: 'Gerente', salario: 15000.0),
+
   ];
 
   // Inicializa os cargos no Firestore (chame uma vez para popular o banco)

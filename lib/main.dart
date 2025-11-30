@@ -8,7 +8,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async  {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Carrega as variáveis de ambiente do arquivo .env
   await dotenv.load(fileName: ".env");
   
   await Firebase.initializeApp();
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Configuração de localização para português do Brasil
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

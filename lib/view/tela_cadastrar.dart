@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:organizese/util/widgets/campo_botao.dart';
 import 'package:organizese/util/widgets/campo_input.dart';
 import 'package:organizese/view/controle_interacao/controle_tela_cadastrar.dart';
-import 'package:organizese/domain/Cargo.dart';
+import 'package:organizese/domain/cargo.dart';
 
 class TelaCadastro extends StatefulWidget {
   const TelaCadastro({super.key});

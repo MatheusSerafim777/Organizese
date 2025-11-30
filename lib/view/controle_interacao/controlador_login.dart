@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:organizese/domain/Funcionario.dart';
+import 'package:organizese/domain/funcionario.dart';
 import 'package:organizese/util/toast.dart';
 import 'package:organizese/util/navegacao.dart';
-import 'package:organizese/view/Tela_inicial01.dart';
-import 'package:organizese/view/Tela_inicial_funcionario.dart';
+import 'package:organizese/view/tela_inicial01.dart';
+import 'package:organizese/view/tela_inicial_funcionario.dart';
 import 'package:email_validator/email_validator.dart';
 
 
