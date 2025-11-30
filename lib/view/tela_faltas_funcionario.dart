@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/domain/Falta.dart';
-import 'package:organizese/view/controle_interacao/ControladorFaltasFuncionario.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/domain/falta.dart';
+import 'package:organizese/view/controle_interacao/controlador_faltas_funcionario.dart';
 import 'package:organizese/util/formatadores.dart';
 import 'package:intl/intl.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:organizese/domain/Funcionario.dart';
+import 'package:organizese/domain/funcionario.dart';
 import 'package:organizese/util/formatadores.dart';
-import 'package:organizese/view/controle_interacao/ControladorCadastroContracheque.dart';
+import 'package:organizese/view/controle_interacao/controlador_cadastro_contracheque.dart';
 
 class TelaCadastroContracheque extends StatefulWidget {
   final Funcionario? funcionarioSelecionado;

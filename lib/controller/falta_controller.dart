@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../domain/Falta.dart';
+import '../domain/falta.dart';
 
 class FaltaController {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   static final CollectionReference _faltasCollection =
       _firestore.collection('Falta');
 
-  /// Adicionar nova falta
+
   static Future<String?> adicionarFalta(Falta falta) async {
     try {
       final docRef = await _faltasCollection.add(falta.toMap());
@@ -17,7 +17,7 @@ class FaltaController {
     }
   }
 
-  /// Buscar falta por ID
+
   static Future<Falta?> buscarFaltaPorId(String id) async {
     try {
       final doc = await _faltasCollection.doc(id).get();
@@ -31,14 +31,13 @@ class FaltaController {
     }
   }
 
-  /// Buscar todas as faltas de um funcionário
   static Future<List<Falta>> buscarFaltasPorFuncionario(String funcionarioId) async {
     try {
       final snapshot = await _faltasCollection
           .where('funcionarioId', isEqualTo: funcionarioId)
           .get();
-      
-      // Ordenar localmente para evitar necessidade de índice
+
+
       final faltas = snapshot.docs
           .map((doc) => Falta.fromMap(doc.id, doc.data() as Map<String, dynamic>))
           .toList();
@@ -53,19 +52,16 @@ class FaltaController {
     }
   }
 
-  /// Buscar faltas de um funcionário em um período
   static Future<List<Falta>> buscarFaltasPorPeriodo({
     required String funcionarioId,
     required DateTime dataInicio,
     required DateTime dataFim,
   }) async {
     try {
-      // Buscar TODAS as faltas do funcionário (sem filtro de data no Firestore)
       final snapshot = await _faltasCollection
           .where('funcionarioId', isEqualTo: funcionarioId)
           .get();
       
-      // Filtrar por período localmente
       final faltas = snapshot.docs
           .map((doc) => Falta.fromMap(doc.id, doc.data() as Map<String, dynamic>))
           .where((falta) {
@@ -74,7 +70,6 @@ class FaltaController {
           })
           .toList();
       
-      // Ordenar por data decrescente
       faltas.sort((a, b) => b.data.compareTo(a.data));
       
       return faltas;
@@ -84,7 +79,6 @@ class FaltaController {
     }
   }
 
-  /// Buscar faltas de um funcionário em um mês/ano específico
   static Future<List<Falta>> buscarFaltasPorMesAno({
     required String funcionarioId,
     required int mes,
@@ -105,7 +99,6 @@ class FaltaController {
     }
   }
 
-  /// Contar faltas de um funcionário
   static Future<int> contarFaltasPorFuncionario(String funcionarioId) async {
     try {
       final snapshot = await _faltasCollection
@@ -119,7 +112,6 @@ class FaltaController {
     }
   }
 
-  /// Contar faltas de um funcionário em um mês/ano
   static Future<int> contarFaltasPorMesAno({
     required String funcionarioId,
     required int mes,
@@ -138,7 +130,6 @@ class FaltaController {
     }
   }
 
-  /// Atualizar falta
   static Future<bool> atualizarFalta(String id, Falta falta) async {
     try {
       await _faltasCollection.doc(id).update(falta.toMap());
@@ -149,7 +140,6 @@ class FaltaController {
     }
   }
 
-  /// Remover falta
   static Future<bool> removerFalta(String id) async {
     try {
       await _faltasCollection.doc(id).delete();
@@ -160,7 +150,6 @@ class FaltaController {
     }
   }
 
-  /// Stream de faltas de um funcionário (para uso em UI reativa)
   static Stream<List<Falta>> streamFaltasPorFuncionario(String funcionarioId) {
     return _faltasCollection
         .where('funcionarioId', isEqualTo: funcionarioId)
@@ -170,24 +159,20 @@ class FaltaController {
           .map((doc) => Falta.fromMap(doc.id, doc.data() as Map<String, dynamic>))
           .toList();
       
-      // Ordenar localmente por data decrescente
       faltas.sort((a, b) => b.data.compareTo(a.data));
       
       return faltas;
     });
   }
 
-  /// Buscar todas as faltas (para admin)
   static Future<List<Falta>> buscarTodasFaltas() async {
     try {
       final snapshot = await _faltasCollection.get();
       
-      // Ordenar localmente
       final faltas = snapshot.docs
           .map((doc) => Falta.fromMap(doc.id, doc.data() as Map<String, dynamic>))
           .toList();
       
-      // Ordenar por data decrescente
       faltas.sort((a, b) => b.data.compareTo(a.data));
       
       return faltas;
@@ -197,7 +182,6 @@ class FaltaController {
     }
   }
 
-  /// Stream de todas as faltas (para admin)
   static Stream<List<Falta>> streamTodasFaltas() {
     return _faltasCollection
         .snapshots()
@@ -206,7 +190,6 @@ class FaltaController {
           .map((doc) => Falta.fromMap(doc.id, doc.data() as Map<String, dynamic>))
           .toList();
       
-      // Ordenar localmente por data decrescente
       faltas.sort((a, b) => b.data.compareTo(a.data));
       
       return faltas;

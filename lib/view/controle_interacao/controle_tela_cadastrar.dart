@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:organizese/controller/BeneficioController.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/domain/Cargo.dart';
-import 'package:organizese/controller/CargoController.dart';
-import 'package:organizese/controller/FuncionarioBeneficioController.dart';
+import 'package:organizese/controller/beneficio_controller.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/domain/cargo.dart';
+import 'package:organizese/controller/cargo_controller.dart';
+import 'package:organizese/controller/funcionario_beneficio_controller.dart';
 
 class ControladorTelaCadastro {
   final formKey = GlobalKey<FormState>();

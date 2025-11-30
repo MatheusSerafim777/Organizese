@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/domain/Funcionario.dart';
+import 'package:organizese/domain/funcionario.dart';
 
 class TelaFuncionario extends StatefulWidget {
   final Funcionario usuario;

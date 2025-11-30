@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../domain/Contracheque.dart';
-import '../domain/Funcionario.dart';
-import 'DescontoController.dart';
-import 'FaltaController.dart';
+import '../domain/contracheque.dart';
+import '../domain/funcionario.dart';
+import 'desconto_controller.dart';
+import 'falta_controller.dart';
 
 class ContrachequeController {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -24,18 +24,18 @@ class ContrachequeController {
       // Calcular descontos obrigatórios
       List<String> todosDescontosIds = List.from(descontosCustomizadosIds);
       
-      // Adicionar descontos padrões (INSS, IRRF, FGTS) ao Firestore e pegar IDs
+      // 1. Calcular INSS primeiro
       final descontoINSS = DescontoController.calcularINSS(salarioBruto);
       final inssId = await DescontoController.adicionarDesconto(descontoINSS);
       if (inssId != null) todosDescontosIds.add(inssId);
       
-      final descontoIRRF = DescontoController.calcularIRRF(salarioBruto);
+      // 2. Calcular IRRF (usando salário - INSS como base)
+      final descontoIRRF = DescontoController.calcularIRRF(salarioBruto, descontoINSS.valor);
       final irrfId = await DescontoController.adicionarDesconto(descontoIRRF);
       if (irrfId != null) todosDescontosIds.add(irrfId);
       
-      final descontoFGTS = DescontoController.calcularFGTS(salarioBruto);
-      final fgtsId = await DescontoController.adicionarDesconto(descontoFGTS);
-      if (fgtsId != null) todosDescontosIds.add(fgtsId);
+      // NOTA: FGTS não é descontado do funcionário, é pago pelo empregador
+      // Por isso foi removido do cálculo do salário líquido
       
       // Buscar faltas do funcionário no mês/ano do contracheque
       final faltas = await FaltaController.buscarFaltasPorMesAno(
@@ -62,7 +62,7 @@ class ContrachequeController {
       }
       
       // Buscar valores dos descontos customizados
-      double totalDescontos = descontoINSS.valor + descontoIRRF.valor + descontoFGTS.valor + descontoFaltasValor;
+      double totalDescontos = descontoINSS.valor + descontoIRRF.valor + descontoFaltasValor;
       for (var descontoId in descontosCustomizadosIds) {
         final desconto = await DescontoController.buscarDescontoPorId(descontoId);
         if (desconto != null) {

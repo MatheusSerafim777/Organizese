@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/domain/Funcionario.dart';
-import 'package:organizese/domain/Contracheque.dart';
-import 'package:organizese/controller/ContrachequeController.dart';
+import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/domain/contracheque.dart';
+import 'package:organizese/controller/contracheque_controller.dart';
 
 class ControladorContrachequesFuncionario {
   final Funcionario funcionario;

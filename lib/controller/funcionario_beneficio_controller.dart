@@ -5,13 +5,11 @@ class FuncionarioBeneficioController {
   static final CollectionReference _funcionarioBeneficioCollection =
       _firestore.collection('Funcionario_Beneficio');
 
-  /// Adicionar benefício a um funcionário
   static Future<String?> adicionarBeneficioAoFuncionario({
     required String funcionarioId,
     required String beneficioId,
   }) async {
     try {
-      // Verificar se já existe essa associação
       final existente = await _funcionarioBeneficioCollection
           .where('funcionarioId', isEqualTo: funcionarioId)
           .where('beneficioId', isEqualTo: beneficioId)
@@ -22,7 +20,6 @@ class FuncionarioBeneficioController {
         return existente.docs.first.id; // Já existe
       }
 
-      // Criar nova associação
       final docRef = await _funcionarioBeneficioCollection.add({
         'funcionarioId': funcionarioId,
         'beneficioId': beneficioId,
@@ -36,17 +33,14 @@ class FuncionarioBeneficioController {
     }
   }
 
-  /// Adicionar múltiplos benefícios a um funcionário de uma vez
   static Future<bool> adicionarBeneficiosAoFuncionario({
     required String funcionarioId,
     required List<String> beneficiosIds,
   }) async {
     try {
-      // Usar batch para operação atômica
       final batch = _firestore.batch();
 
       for (String beneficioId in beneficiosIds) {
-        // Verificar se já existe
         final existente = await _funcionarioBeneficioCollection
             .where('funcionarioId', isEqualTo: funcionarioId)
             .where('beneficioId', isEqualTo: beneficioId)
@@ -54,7 +48,6 @@ class FuncionarioBeneficioController {
             .get();
 
         if (existente.docs.isEmpty) {
-          // Criar novo documento
           final docRef = _funcionarioBeneficioCollection.doc();
           batch.set(docRef, {
             'funcionarioId': funcionarioId,
@@ -72,7 +65,6 @@ class FuncionarioBeneficioController {
     }
   }
 
-  /// Buscar todos os benefícios de um funcionário (retorna IDs)
   static Future<List<String>> buscarBeneficiosPorFuncionario(String funcionarioId) async {
     try {
       final snapshot = await _funcionarioBeneficioCollection
@@ -89,7 +81,6 @@ class FuncionarioBeneficioController {
     }
   }
 
-  /// Buscar todos os funcionários que têm um determinado benefício (retorna IDs)
   static Future<List<String>> buscarFuncionariosPorBeneficio(String beneficioId) async {
     try {
       final snapshot = await _funcionarioBeneficioCollection
@@ -106,7 +97,6 @@ class FuncionarioBeneficioController {
     }
   }
 
-  /// Remover benefício de um funcionário
   static Future<bool> removerBeneficioDoFuncionario({
     required String funcionarioId,
     required String beneficioId,
@@ -128,7 +118,6 @@ class FuncionarioBeneficioController {
     }
   }
 
-  /// Remover todos os benefícios de um funcionário
   static Future<bool> removerTodosBeneficiosDoFuncionario(String funcionarioId) async {
     try {
       final snapshot = await _funcionarioBeneficioCollection
@@ -148,7 +137,6 @@ class FuncionarioBeneficioController {
     }
   }
 
-  /// Stream de benefícios de um funcionário (para UI reativa)
   static Stream<List<String>> streamBeneficiosPorFuncionario(String funcionarioId) {
     return _funcionarioBeneficioCollection
         .where('funcionarioId', isEqualTo: funcionarioId)
@@ -161,7 +149,6 @@ class FuncionarioBeneficioController {
     });
   }
 
-  /// Verificar se funcionário tem um benefício específico
   static Future<bool> funcionarioTemBeneficio({
     required String funcionarioId,
     required String beneficioId,
