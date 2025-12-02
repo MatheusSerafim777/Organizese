@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:organizese/domain/funcionario.dart';
 import 'package:organizese/util/navegacao.dart';
 import 'package:organizese/view/tela_login.dart';
-import 'package:organizese/view/tela_inicial01.dart';
+import 'package:organizese/view/tela_inicial.dart';
 import 'package:organizese/controller/cargo_controller.dart';
 import 'package:organizese/controller/beneficio_controller.dart';
 import 'package:organizese/controller/desconto_controller.dart';

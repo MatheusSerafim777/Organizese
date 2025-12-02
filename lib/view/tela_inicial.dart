@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:organizese/domain/funcionario.dart';
+import 'package:organizese/view/tela_cadastrar.dart';
 import 'package:organizese/view/tela_cadastro_contracheque.dart';
 import 'package:organizese/view/tela_cadastro_falta.dart';
 import 'package:organizese/view/tela_homepage.dart';
@@ -24,13 +25,9 @@ class _TelaInicialState extends State<TelaInicial01> {
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     Widget currentPage;
+
     switch (_selectedIndex) {
       case 0:
         currentPage = HomePage();
@@ -40,6 +37,9 @@ class _TelaInicialState extends State<TelaInicial01> {
         break;
       case 2:
         currentPage = TelaCadastroContracheque();
+        break;
+      case 3:
+        currentPage = TelaCadastro();
         break;
       default:
         currentPage = HomePage();
@@ -57,21 +57,37 @@ class _TelaInicialState extends State<TelaInicial01> {
               await FirebaseAuth.instance.signOut();
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => Telalogin()),
-                (route) => false
+                    (route) => false,
               );
             },
           ),
         ],
       ),
+
       body: currentPage,
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         selectedItemColor: Colors.green[700],
+        type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'),
-          BottomNavigationBarItem(icon: Icon(Icons.edit_outlined), label: 'Cadastrar Falta'),
-          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Contracheque'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Início',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.assignment),
+            label: 'Faltas',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt_long),
+            label: 'Contracheque',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_add),
+            label: 'Cadastro',
+          ),
         ],
       ),
     );

@@ -66,13 +66,10 @@ class _TelaloginState extends State<Telalogin> {
               alignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                const Text("Ainda não está cadastrado?"),
-                TextButton(
-                  onPressed: () {
-                    push(context, TelaCadastro());
-                  },
-                  child: const Text("Crie sua conta"),
-                ),
+                Text("Ainda não está cadastrado? "),
+                Text(
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                    "Contate o seu administrador")
               ],
             ),
           ],
