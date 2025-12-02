@@ -249,11 +249,13 @@ class _TelaCadastroContrachequeState extends State<TelaCadastroContracheque> {
                             children: [
                               Icon(Icons.check_circle, color: Colors.green, size: 20),
                               SizedBox(width: 8),
-                              Text(
-                                'Nenhuma falta registrada neste período',
-                                style: TextStyle(
-                                  color: Colors.green[700],
-                                  fontWeight: FontWeight.w500,
+                              Expanded(
+                                child: Text(
+                                  'Nenhuma falta registrada neste período',
+                                  style: TextStyle(
+                                    color: Colors.green[700],
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ],
