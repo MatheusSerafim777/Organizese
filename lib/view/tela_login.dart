@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:organizese/util/navegacao.dart';
 import 'package:organizese/util/widgets/campo_botao.dart';
 import 'package:organizese/util/widgets/campo_input.dart';
 import 'package:organizese/view/controle_interacao/controlador_login.dart';
-import 'package:organizese/view/tela_cadastrar.dart';
 
 
 class Telalogin extends StatefulWidget {

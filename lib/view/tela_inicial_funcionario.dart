@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:organizese/domain/funcionario.dart';
-import 'package:organizese/view/tela_cadastro_contracheque.dart';
-import 'package:organizese/view/tela_cadastro_falta.dart';
 import 'package:organizese/view/tela_contracheques_funcionario.dart';
 import 'package:organizese/view/tela_faltas_funcionario.dart';
 import 'package:organizese/view/tela_funcionario.dart';
