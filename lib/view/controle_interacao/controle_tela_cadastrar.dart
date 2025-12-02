@@ -6,6 +6,7 @@ import 'package:organizese/domain/funcionario.dart';
 import 'package:organizese/domain/cargo.dart';
 import 'package:organizese/controller/cargo_controller.dart';
 import 'package:organizese/controller/funcionario_beneficio_controller.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class ControladorTelaCadastro {
   final formKey = GlobalKey<FormState>();
@@ -20,7 +21,6 @@ class ControladorTelaCadastro {
   // Cargo selecionado
   Cargo? cargoSelecionado;
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   // Obtém lista de cargos disponíveis do Firestore
@@ -73,7 +73,7 @@ class ControladorTelaCadastro {
   Future<void> _adicionarBeneficiosPadroes(String funcionarioId) async {
     try {
       final beneficios = await BeneficioController.buscarTodosBeneficios();
-      
+
       if (beneficios.isEmpty) {
         print('Nenhum benefício encontrado no sistema');
         return;
@@ -114,10 +114,28 @@ class ControladorTelaCadastro {
     final cpfInformado = controladorCpf.text.trim();
 
     try {
-      final cred = await _auth.createUserWithEmailAndPassword(email: email, password: senha);
+      // Criar uma instância secundária do Firebase para não fazer logout do admin
+      FirebaseApp? tempApp;
+      FirebaseAuth? tempAuth;
+      
+      try {
+        // Tentar obter a app secundária se já existir
+        tempApp = Firebase.app('SecondaryApp');
+      } catch (e) {
+        // Se não existir, criar uma nova
+        tempApp = await Firebase.initializeApp(
+          name: 'SecondaryApp',
+          options: Firebase.app().options,
+        );
+      }
+      
+      tempAuth = FirebaseAuth.instanceFor(app: tempApp);
+      
+      // Criar o novo usuário usando a instância secundária
+      final cred = await tempAuth.createUserWithEmailAndPassword(email: email, password: senha);
 
-      if (nomeInformado.isNotEmpty && _auth.currentUser != null) {
-        await _auth.currentUser!.updateDisplayName(nomeInformado);
+      if (nomeInformado.isNotEmpty && cred.user != null) {
+        await cred.user!.updateDisplayName(nomeInformado);
       }
 
       final uid = cred.user!.uid;
@@ -132,11 +150,10 @@ class ControladorTelaCadastro {
       );
 
       await _adicionarBeneficiosPadroes(uid);
+      
+      await tempAuth.signOut();
 
-      await _auth.signOut();
-
-      _mostrarSnack(context, "Cadastro realizado com sucesso! Faça login para acessar.");
-      Navigator.of(context).pop();
+      _mostrarSnack(context, "Cadastro realizado com sucesso!");
     } on FirebaseAuthException catch (e) {
       String msg = "Erro ao cadastrar";
       if (e.code == 'email-already-in-use') msg = "Email já está em uso";
