@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:organizese/domain/funcionario.dart';
-import 'package:organizese/util/toast.dart';
 import 'package:organizese/util/navegacao.dart';
 import 'package:organizese/view/tela_inicial.dart';
 import 'package:organizese/view/tela_inicial_funcionario.dart';
@@ -21,6 +20,16 @@ class ControleLogin {
   CollectionReference<Map<String, dynamic>> get _collection_funcionario =>
       FirebaseFirestore.instance.collection('Funcionario');
 
+  void _mostrarSnack(BuildContext context, String msg, {bool erro = false}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        backgroundColor: erro ? Colors.red : Colors.green,
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
   void logar(BuildContext context) async {
     if (formkey.currentState!.validate()) {
       String login = controlador_login.text.trim();
@@ -33,19 +42,24 @@ class ControleLogin {
           _irParaTelaPrincipal(userCredential.user, context);
         } on FirebaseAuthException catch (e) {
           if (e.code == 'invalid-credential') {
-            MensagemErro(
-                context, "Dados invalidos, caso nao tenha login faca o cadastro !");
+            _mostrarSnack(
+                context, "Dados inválidos, caso não tenha login faça o cadastro!", erro: true);
           } else if (e.code == 'wrong-password') {
-            MensagemAlerta(
-              context,
-              "Erro: Password inválido!!!",
-            );
-            print('Wrong password provided for that user.');
+            _mostrarSnack(context, "Senha inválida!", erro: true);
+          } else if (e.code == 'user-not-found') {
+            _mostrarSnack(context, "Usuário não encontrado!", erro: true);
+          } else if (e.code == 'too-many-requests') {
+            _mostrarSnack(context, "Muitas tentativas. Tente novamente mais tarde.", erro: true);
+          } else {
+            _mostrarSnack(context, "Erro ao fazer login: ${e.message ?? e.code}", erro: true);
           }
-          print(e.code);
+          print('FirebaseAuthException: ${e.code}');
+        } catch (e) {
+          _mostrarSnack(context, "Erro inesperado ao fazer login: $e", erro: true);
+          print('Erro inesperado: $e');
         }
       } else {
-        MensagemAlerta(context, "Erro: Email informado com formato inválido");
+        _mostrarSnack(context, "Email informado com formato inválido", erro: true);
       }
     }
   }
@@ -57,7 +71,7 @@ class ControleLogin {
         .listen((data) {
       
       if (data.docs.isEmpty) {
-        MensagemAlerta(context, "Erro: Funcionário não encontrado no sistema");
+        _mostrarSnack(context, "Funcionário não encontrado no sistema", erro: true);
         return;
       }
       

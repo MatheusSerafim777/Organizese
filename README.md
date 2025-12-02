@@ -1,16 +1,16 @@
-# 📊 Organizese - Sistema de Gestão de Folha de Pagamento
+# Organizese - Sistema de Gestão de Folha de Pagamento
 
 Um aplicativo Flutter completo para gerenciamento de funcionários, contracheques, benefícios, descontos e faltas.
 
-## 🎯 Funcionalidades Principais
+##  Funcionalidades Principais
 
-### 👥 Gestão de Funcionários
+### Gestão de Funcionários
 - Cadastro completo de funcionários
 - Gerenciamento de cargos
 - Controle de salários
 - Vínculo com benefícios
 
-### 💰 Contracheques
+### Contracheques
 - Geração automática de contracheques mensais
 - Cálculo automático de descontos obrigatórios:
   - **INSS** (progressivo conforme tabela 2025)
@@ -19,18 +19,18 @@ Um aplicativo Flutter completo para gerenciamento de funcionários, contracheque
 - Adição de acréscimos (horas extras, bônus, etc.)
 - Histórico completo por funcionário
 
-### 📅 Controle de Faltas
+### Controle de Faltas
 - Registro de faltas com data e motivo
 - Diferenciação entre faltas justificadas e não justificadas
 - Cálculo automático de descontos (1/30 do salário por dia)
 - Integração com contracheques
 
-### 🎁 Benefícios
+### Benefícios
 - Cadastro de benefícios diversos
 - Vínculo de benefícios aos funcionários
 - Controle de valores
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Flutter** ^3.9.2
 - **Firebase**
@@ -42,7 +42,7 @@ Um aplicativo Flutter completo para gerenciamento de funcionários, contracheque
 - **Email Validator** (validação de e-mails)
 - **Shared Preferences** (armazenamento local)
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 lib/
@@ -72,7 +72,7 @@ lib/
     └── formatadores.dart
 ```
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 - Flutter SDK (versão 3.9.2 ou superior)
@@ -102,7 +102,7 @@ flutter pub get
 flutter run
 ```
 
-## 📊 Cálculo de Descontos (2025)
+## Cálculo de Descontos (2025)
 
 ### INSS - Progressivo
 | Faixa Salarial | Alíquota |
@@ -125,7 +125,7 @@ flutter run
 ### Faltas
 - Desconto = (Salário ÷ 30 dias) × Número de faltas não justificadas
 
-## 💡 Exemplo de Cálculo
+## Exemplo de Cálculo
 
 **Funcionário:** Gerente  
 **Salário Bruto:** R$ 10.000,00  
@@ -139,7 +139,7 @@ Salário Bruto:     R$ 10.000,00
 = Salário Líquido: R$  7.122,74
 ```
 
-## 🔒 Segurança
+## Segurança
 
 - Autenticação via Firebase Authentication
 - Dados armazenados no Firebase Database
