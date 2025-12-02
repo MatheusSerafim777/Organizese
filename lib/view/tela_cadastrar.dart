@@ -23,7 +23,6 @@ class _TelaCadastroState extends State<TelaCadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Cadastrar")),
       body: _body(),
     );
   }
@@ -50,110 +49,116 @@ class _TelaCadastroState extends State<TelaCadastro> {
         final cargos = snapshot.data ?? [];
 
         return Form(
-      key: _controle.formKey,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        child: ListView(
-          children: [
-            CampoInput(
-              "Nome",
-              texto_placehoader: "Como quer ser chamado?",
-              controlador: _controle.controladorNome,
-            ),
-            const SizedBox(height: 20),
-            CampoInput(
-              "Email",
-              texto_placehoader: "seuemail@exemplo.com",
-              controlador: _controle.controladorEmail,
-              // formatação de e-mail fica a cargo do seu EmailValidator
-              validador: (v) {
-                if (v == null || v.trim().isEmpty) return "Informe o email";
-                return null;
-              },
-            ),
-            const SizedBox(height: 20),
-            CampoInput(
-              "Senha",
-              passaword: true,
-              controlador: _controle.controladorSenha,
-              validador: (v) {
-                if (v == null || v.length < 6) return "Mínimo de 6 caracteres";
-                return null;
-              },
-            ),
-            const SizedBox(height: 20),
-            CampoInput(
-              "Confirmar senha",
-              passaword: true,
-              controlador: _controle.controladorConfirmarSenha,
-              validador: (v) {
-                if (v == null || v.isEmpty) return "Confirme a senha";
-                if (v != _controle.controladorSenha.text) {
-                  return "As senhas não coincidem";
-                }
-                return null;
-              },
-            ),
-
-            const SizedBox(height: 20),
-            // Dropdown para seleção de cargo
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                  labelText: "Cargo",
-                  border: InputBorder.none,
+          key: _controle.formKey,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            child: ListView(
+              children: [
+                CampoInput(
+                  "Nome",
+                  texto_placehoader: "Como quer ser chamado?",
+                  controlador: _controle.controladorNome,
                 ),
-                initialValue: _controle.cargoSelecionado?.id,
-                items: cargos.map((cargo) {
-                  return DropdownMenuItem<String>(
-                    value: cargo.id,
-                    child: Text(cargo.nome),
-                  );
-                }).toList(),
-                onChanged: (String? cargoId) {
-                  if (cargoId != null) {
-                    final cargo = cargos.firstWhere((c) => c.id == cargoId);
-                    setState(() {
-                      _controle.selecionarCargo(cargo);
-                    });
-                  }
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Selecione um cargo";
-                  }
-                  return null;
-                },
-              ),
-            ),
-            const SizedBox(height: 20),
-            CampoInput(
-              "Idade",
-              texto_placehoader: "Ex.: 28",
-              controlador: _controle.controladorIdade,
-            ),
-            const SizedBox(height: 20),
-            CampoInput(
-              "CPF",
-              texto_placehoader: "Somente números (11 dígitos)",
-              controlador: _controle.controladorCpf,
-            ),
+                const SizedBox(height: 20),
+                CampoInput(
+                  "Email",
+                  texto_placehoader: "seuemail@exemplo.com",
+                  controlador: _controle.controladorEmail,
+                  validador: (v) {
+                    if (v == null || v.trim().isEmpty) {
+                      return "Informe o email";
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                CampoInput(
+                  "Senha",
+                  passaword: true,
+                  controlador: _controle.controladorSenha,
+                  validador: (v) {
+                    if (v == null || v.length < 6) {
+                      return "Mínimo de 6 caracteres";
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                CampoInput(
+                  "Confirmar senha",
+                  passaword: true,
+                  controlador: _controle.controladorConfirmarSenha,
+                  validador: (v) {
+                    if (v == null || v.isEmpty) {
+                      return "Confirme a senha";
+                    }
+                    if (v != _controle.controladorSenha.text) {
+                      return "As senhas não coincidem";
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
 
-            const SizedBox(height: 20),
-            Botao(
-              texto: "Cadastrar",
-              cor: Colors.black,
-              aoClicar: () => _controle.cadastrar(context),
+                // Dropdown para seleção de cargo
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      labelText: "Cargo",
+                      border: InputBorder.none,
+                    ),
+                    initialValue: _controle.cargoSelecionado?.id,
+                    items: cargos.map((cargo) {
+                      return DropdownMenuItem<String>(
+                        value: cargo.id,
+                        child: Text(cargo.nome),
+                      );
+                    }).toList(),
+                    onChanged: (String? cargoId) {
+                      if (cargoId != null) {
+                        final cargo = cargos.firstWhere((c) => c.id == cargoId);
+                        setState(() {
+                          _controle.selecionarCargo(cargo);
+                        });
+                      }
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Selecione um cargo";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+                CampoInput(
+                  "Idade",
+                  texto_placehoader: "Ex.: 28",
+                  controlador: _controle.controladorIdade,
+                ),
+                const SizedBox(height: 20),
+                CampoInput(
+                  "CPF",
+                  texto_placehoader: "Somente números (11 dígitos)",
+                  controlador: _controle.controladorCpf,
+                ),
+                const SizedBox(height: 20),
+
+                Botao(
+                  texto: "Cadastrar",
+                  cor: Colors.black,
+                  aoClicar: () => _controle.cadastrar(context),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
       },
     );
   }

@@ -337,19 +337,19 @@ class _TelaEdicaoFuncionarioState extends State<TelaEdicaoFuncionario> {
 
               // Botões de ação
               Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      onPressed: _isLoading
-                          ? null
-                          : () => Navigator.pop(context),
-                      icon: Icon(Icons.cancel),
-                      label: Text('Cancelar'),
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                      ),
+                children: [Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _isLoading
+                        ? null
+                        : () => Navigator.pop(context),
+                    icon: Icon(Icons.cancel),
+                    label: Text('Cancelar'),
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 16),
                     ),
                   ),
+                ),
+
                   SizedBox(width: 16),
                   Expanded(
                     flex: 2,
